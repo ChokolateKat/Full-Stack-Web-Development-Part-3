@@ -19,11 +19,67 @@ app.get('/api/persons', (request, response) => {
     response.json(persons)
 })
 
+app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const person = persons.find(person => person.id === id)
+
+    if (person) {
+        response.json(person)
+    } else {
+        response.status(404).end()
+    }
+})
+
 app.get('/info', (request, response) => {
     let info = `Phonebook has info for ${persons.length} people`
     info = info.concat(`\n${new Date()}`)
     response.send(info)
 })
+
+app.delete('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    persons = persons.filter(person => person.id !== id)
+
+    response.status(204).end()
+})
+
+app.post('/api/persons', (request, response) => {
+    console.log(request.body)
+    const body = request.body
+
+    if (!body.name)
+    {
+        return response.status(400).json({
+            error: 'name is missing'
+        })
+    } 
+    else if (!body.numbder)
+    {
+        return response.status(400).json({
+            error: 'number is missing'
+        })
+    }
+    else if (!persons.find(person => person.name === body.name))
+    {
+        return response.status(400).json({
+            error: 'name must be unique'
+        })
+    }
+    
+    const person = {
+        name: body.name,
+        number: body.number,
+        id: generateId()
+    }
+
+    persons = person.concat(person)
+
+    response.json(person)
+})
+
+const generateId = () => {
+    return Math.floor(Math.random() * 5000000) + 1
+}
 
 const PORT = 3001
 app.listen(PORT, () => {
