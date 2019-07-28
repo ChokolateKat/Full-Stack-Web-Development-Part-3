@@ -37,9 +37,6 @@ const App = () => {
     )
   }
 
-  
-    
-
   const handleSubmission = (event) => {
     event.preventDefault()
 
@@ -94,9 +91,6 @@ const App = () => {
         entry.name.toLowerCase().includes(
           newFilter.toLowerCase())).map(
             entry => <Entry entry = {entry} localUpdate = {localUpdate}/>)
-
-      
-  
 
   const handleNewNumber = (event) => 
     setNewNumber(event.target.value)
