@@ -97,5 +97,6 @@ const generateId = () => {
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
+  console.log('Heroku Port', process.env.PORT)
   console.log(`Server running on port ${PORT}`)
 })
