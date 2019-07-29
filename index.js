@@ -30,6 +30,12 @@ let persons = [
     }
 ]
 
+app.get('/', (request, response) => {
+    const message = 'heroku operational'
+    response.send(message)
+    console.log(message)
+})
+
 app.get('/api/persons', (request, response) => {
     response.json(persons)
 })
