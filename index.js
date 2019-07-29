@@ -6,6 +6,7 @@ const cors = require('cors')
 
 app.use(cors())
 
+app.use(express.static('build'))
 app.use(bodyParser.json())
 
 const tiny = ':method :url :status :res[content-length] - :response-time ms'
@@ -31,7 +32,7 @@ let persons = [
 ]
 
 app.get('/', (request, response) => {
-    const message = 'heroku operational'
+    const message = 'Heroku Operational'
     response.send(message)
     console.log(message)
 })
